@@ -14,5 +14,6 @@ data/work/
 __pycache__/
 *.zip
 *.tar.gz
+*.part
 .DS_Store
 Thumbs.db
