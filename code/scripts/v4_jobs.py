@@ -12,8 +12,8 @@ def read(p):
 
 def main():
     stage=sys.argv[sys.argv.index('--v4')+1];jobs=[]
-    builds={(r['name'],r['prune']):r for p in ['../results/v2/build.csv','results/v4_build.csv'] for r in read(p) if r['status']=='OK'}
-    mems={r['name']:r for r in read('../results/v2/mem.csv')}
+    builds={(r['name'],r['prune']):r for p in ['results/build.csv','results/v4_build.csv'] for r in read(p) if r['status']=='OK'}
+    mems={r['name']:r for r in read('results/mem.csv')}
     def job(jid,kind,mem,threads,deps,command):jobs.append('\t'.join([jid,kind,str(round(mem)),str(threads),','.join(deps) or '-',command]))
     def phi(tag,days=90,slot=32,dow='0-4',lo=0):return f"'{tag}:dow={dow};slots={slot}-{slot+1};days={lo}-{days}'"
     def kdays(days,dow=(0,1,2,3,4)):return sum(d%7 in dow for d in range(days))
@@ -55,7 +55,7 @@ def main():
                     'bin/htq build --data ../data/models/CD_r4.bin --name CD_r4 --prune points --threads 8 --index idx/CD_r4_points.idx --csv results/v4_build.csv')
         else:raise SystemExit('invalid build stage')
     elif stage=='case':
-        job('v4_case_analysis','gen',16,1,['../data/models/CD_r4.bin','../results/v2/real/case_cd.csv']+[f'../data/queries/CD/D{i}.txt' for i in [4,6,8,10]],PY+' scripts/case_v4.py')
+        job('v4_case_analysis','gen',16,1,['../data/models/CD_r4.bin']+[f'../data/queries/CD/D{i}.txt' for i in [4,6,8,10]],'make bin/model_case && '+PY+' scripts/case_v4.py')
     elif stage=='time':
         for label,slot,dow in [('wk03',12,'0-4'),('wk12',48,'0-4'),('wk17',68,'0-4'),('wk21',84,'0-4'),('we08',32,'5-6'),('all08',32,'0-6')]:
             k=65 if dow=='0-4' else 25 if dow=='5-6' else 90

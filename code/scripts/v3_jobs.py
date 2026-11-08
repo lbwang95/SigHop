@@ -31,7 +31,7 @@ def main():
         builds=list(csv.DictReader(open('results/build_v3.csv'))) if Path('results/build_v3.csv').exists() else []
         only=next((r for r in builds if r['name']=='NY_r4_d90' and r['prune']=='pointsonly' and r['status']=='OK'),None)
         if only:
-            mem=next(r for r in csv.DictReader(open('../results/v2/mem.csv')) if r['name']=='NY_r4_d90')
+            mem=next(r for r in csv.DictReader(open('results/mem.csv')) if r['name']=='NY_r4_d90')
             reserve=float(only['label_mb'])/1000*1.3+65*float(mem['cch_world_mb'])/1000+6
             sets=','.join('D%d'%i for i in range(1,11))
             job('v3_e8_NY_pointsonly','time',reserve,1,['../data/generated/NY_r4_d90.bin','../data/queries/NY/D10.txt','idx/NY_r4_d90_pointsonly.idx'],

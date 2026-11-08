@@ -1,6 +1,6 @@
 # SigHop: Efficiently Answering Travel-Time Quantile Queries over Historical Traffic
 
-This repository contains the source code, data, and experimental results for SigHop.
+This repository contains the source code and data for SigHop.
 
 SigHop answers travel-time quantile queries over historical traffic using a low-rank model of edge travel times. The code also includes CCH-All, CCH-Batch, Dijkstra, and TTP-adapt.
 
@@ -70,7 +70,6 @@ The fitted traffic models and query sets are included in `data/`. The four DIMAC
 | Chengdu (CD), Chicago (CHI) | `data/models/` | Fitted models at ranks 2, 4, 6, and 8; `HTQDATA1` format |
 | Query sets | `data/queries/` | The original source-target pairs used in the experiments |
 | NY, BAY, COL, FLA | Download attachment | Original DIMACS travel-time graphs and coordinates |
-| Recorded results | `results/v2/`, `results/v3/`, `results/v4/` | Main numerical results, including timeout counts |
 
 Download and verify the DIMACS files from `code/`:
 
@@ -92,6 +91,5 @@ code/
 data/
   models/       Fitted CD and CHI models
   queries/      Fixed query sets
-results/        Recorded numerical results
 docs/           Data format and experiment instructions
 ```

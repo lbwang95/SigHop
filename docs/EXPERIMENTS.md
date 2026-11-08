@@ -1,6 +1,6 @@
 # Experiments
 
-Run the commands below from `code/`. The paper's results are in the top-level `results/` directory. New runs write to `code/results/`.
+Run the commands below from `code/`. Output files are written to `code/results/`.
 
 ## Tests
 
@@ -44,13 +44,13 @@ python3 scripts/make_jobs.py threads > jobs_threads.tsv
 python3 scripts/sched.py jobs_threads.tsv --max-jobs 1 --max-mem-gb 900
 ```
 
-Additional experiments are available through `--extra X1` through `--extra X7`. Results for X1-X4 are in `results/v2/`, and the TTP parameter experiment (X6) is in `results/v3/x6.csv`. X5 was stopped; X7 was not run.
+Additional experiment jobs are available through `--extra X1` through `--extra X7`. Their parameters are defined in `scripts/make_jobs.py`.
 
 ## Additional baselines and ablations
 
 `python3 scripts/make_jobs.py --v3 time` generates TTP jobs for the selected-day experiment and the TTP parameter sweep. It also generates point-only queries when the corresponding build result is available.
 
-The `--v4` tasks cover the remaining parameter baselines, query ablations, serial construction experiments, and CD case study. They require the generated datasets and points indexes from the main experiments. Run the query check first, then the six construction jobs in order. The seventh job builds the CD index if needed:
+The `--v4` tasks cover the remaining parameter baselines, query ablations, serial construction experiments, and CD case study. They use the datasets, points indexes, and local `results/build.csv` and `results/mem.csv` produced by the main stages above. Run the query check first, then the six construction jobs in order. The seventh job builds the CD index if needed:
 
 ```bash
 python3 scripts/make_jobs.py --v4 default-check > jobs_v4_check.tsv
@@ -67,22 +67,10 @@ python3 scripts/sched.py jobs_v4_time.tsv --max-mem-gb 900 --max-time-jobs 12 --
 
 Run these builds without other experiment tasks. Temporary indexes are named `idx/tmp_v4_*` and can be removed after each build, except for the FLA box index, which is needed for the D1/D10 query checks. Keep the CD index for MAP timing. Build timeouts apply separately to the shortcut and label stages.
 
-The NY query check should give `hubs_kept=1, cands_kept=1.032` for D1 and `hubs_kept=12.627, cands_kept=139.169` for D10. Small differences in `boxkept_mean` can arise from parallel construction order.
-
 ## Chengdu case analysis
 
-Install NumPy and run `scripts/case_v4.py` through the case task above. It first checks the 40-slot source-target profile against `results/v2/real/case_cd.csv`, then generates 20,000 pair-slot rows and 3,802 map rows. The larger pair/map CSVs are regenerated from the bundled model and queries instead of being stored in Git.
+Install NumPy and run `scripts/case_v4.py` through the case task above. The task builds `bin/model_case` to calculate a reference profile from the model, checks the Python profile against it, and then computes the pair and map outputs. No precomputed result files are required. To invoke the Python script directly, first run `make bin/model_case`.
 
 The profile is for 1291 to 1127 over 22 weekdays in days [15,45). Shortest-path ties use sequential float64 component sums, a heap ordered by (distance, vertex ID), original outgoing edge order, and predecessor updates only for strictly shorter paths. Routes are distinguished by their directed edge sequences.
 
 `mean_eta` is the shortest travel time under the mean factor vector. `late_mean` counts days whose daily optimum exceeds that estimate; it is a lower bound on late days when following the fixed mean-condition route. `fixed_p50` and `fixed_p95` evaluate that fixed route across the snapshots. MAP timings run 1,901 independent source-target queries for each method.
-
-## Recorded results
-
-| Directory | Contents |
-|---|---|
-| `results/v2/` | Main distance/parameter experiments, index sizes/build costs, X1-X4, and real-data model/reference summaries |
-| `results/v3/` | TTP day-count/parameter additions and the first point-only experiment |
-| `results/v4/` | Completed parameter baselines, expanded query ablations, isolated construction results, and CD case summaries |
-
-Query CSVs report `completed`, `timeouts`, `verified`, and `mismatches`. An `OK` status may include individual TTP timeouts; use the completion and timeout counts when comparing latency. The `mean_us` column is the median of the per-round mean query times, in microseconds. Model-versus-reference query errors use published speeds, with the rank-8 model filling missing observations.

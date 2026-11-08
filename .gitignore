@@ -3,6 +3,7 @@ code/bin/
 code/idx/
 code/logs/
 code/results/
+/results/
 code/jobs_*.tsv
 data/dimacs/
 data/generated/

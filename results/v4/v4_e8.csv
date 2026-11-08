@@ -1,3 +1,0 @@
-name,r,days,N,k,levels,phi,method,set,queries,completed,timeouts,rounds,mean_us,min_us,max_us,prep_s,custom_ms,hubs,hubs_kept,cands,cands_kept,verified,mismatches,peak_rss_mb,status
-FLA_r4_d90,4,90,3600,65,3,wk90,sighop,D1,1000,1000,0,3,0.456187,0.442096,0.810258,0,0,1.111,1,1.305,1.059,1000,0,69848.51953,OK
-FLA_r4_d90,4,90,3600,65,3,wk90,sighop,D10,1000,1000,0,3,4.048934,3.195143,5.830548,0,0,53.259,1.76,1185.848,36.886,1000,0,69848.51953,OK

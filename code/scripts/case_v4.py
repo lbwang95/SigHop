@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Chengdu case analysis using deterministic shortest-path searches."""
-import csv,hashlib,heapq,json,math,struct,time
+import csv,hashlib,heapq,json,math,struct,subprocess,tempfile,time
 from collections import defaultdict,deque
 from pathlib import Path
 import numpy as np
@@ -27,11 +27,35 @@ def load(path):
     assert np.all(z[:,0]==1) and len(np.unique(day.astype('i8')*96+slot))==N
     return n,m,r,N,fr,to,u,z,day,slot,dow,xy
 
+def reference_profile(data):
+    program=Path('bin/model_case')
+    if not program.is_file():raise FileNotFoundError('Run make bin/model_case before case analysis')
+    with tempfile.TemporaryDirectory(prefix='sighop-case-') as folder:
+        folder=Path(folder)
+        subprocess.run([str(program),'--data',str(data),'--name','CD_r4',
+            '--queries','../data/queries/CD/D8.txt','--psi','last30_weekdays:dow=0-4;days=15-45',
+            '--max-queries','1','--out',str(folder/'profile.csv'),'--details',str(folder/'worlds.csv'),
+            '--paths',str(folder/'paths.csv'),'--validation',str(folder/'validation.csv')],check=True)
+        with (folder/'validation.csv').open() as f:
+            checks=list(csv.DictReader(f))
+        assert checks and all(int(row['mismatches'])==0 for row in checks),'Reference path checks failed'
+        with (folder/'profile.csv').open() as f:
+            rows=list(csv.DictReader(f))
+        result={}
+        for row in rows:
+            assert (int(row['s']),int(row['t']))==(1291,1127)
+            slot=int(row['slot']);label=f'{slot//4:02d}:{slot%4*15:02d}'
+            assert label not in result
+            result[label]=dict(days=row['worlds'],routes=row['distinct_selected_paths'],
+                **{f'p{p}_min':float(row[f'p{p}'])/60 for p in [50,80,95]})
+        assert len(result)==40
+        return result
+
 def main():
     R.mkdir(parents=True,exist_ok=True);P.mkdir(parents=True,exist_ok=True)
     assert not (R/'v4_case_profile.csv').exists(),'Output already exists: results/real/v4_case_profile.csv'
-    data=Path('../data/models/CD_r4.bin');old=Path('../results/v2/real/case_cd.csv')
-    inputs=[data,old]+[Path(f'../data/queries/CD/D{i}.txt') for i in [4,6,8,10]]
+    data=Path('../data/models/CD_r4.bin')
+    inputs=[data]+[Path(f'../data/queries/CD/D{i}.txt') for i in [4,6,8,10]]
     hashes={str(p):sha(p) for p in inputs};begin=time.time()
     n,m,r,N,fr,to,u,z,day,slot,dow,xy=load(data)
     # Same arc order as GraphCsr: original edge id ascending within each outgoing list.
@@ -86,7 +110,7 @@ def main():
         return q,float(mean[t]),int(np.sum(ds[:,t]>mean[t])),fq,len(routes)
     start=lambda tau:f'{tau//4:02d}:{tau%4*15:02d}'
     anchor={};profile=[];validation=[]
-    reference={x['start']:x for x in csv.DictReader(old.open())}
+    reference=reference_profile(data)
     for tau in available:
         cache=compute(1291,tau);anchor[tau]=cache
         q,eta,late,fq,routes=metrics(1291,1127,tau,cache)

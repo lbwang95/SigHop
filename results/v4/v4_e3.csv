@@ -1,4 +1,0 @@
-name,r,days,N,k,levels,phi,method,set,queries,completed,timeouts,rounds,mean_us,min_us,max_us,prep_s,custom_ms,hubs,hubs_kept,cands,cands_kept,verified,mismatches,peak_rss_mb,status
-NY_r2_d90,2,90,3600,65,3,wk90,ttp,D10,20,19,1,1,5719098.335,5719098.335,5719098.335,0,0,0,0,0,0,19,0,802.0507812,OK
-NY_r6_d90,6,90,3600,65,3,wk90,ttp,D10,20,15,5,1,17502622.29,17502622.29,17502622.29,0,0,0,0,0,0,15,0,814.1484375,OK
-NY_r8_d90,8,90,3600,65,3,wk90,ttp,D10,20,13,7,1,23693658.83,23693658.83,23693658.83,0,0,0,0,0,0,13,0,820.1601562,OK
