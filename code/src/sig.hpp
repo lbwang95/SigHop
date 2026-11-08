@@ -94,7 +94,7 @@ struct PruneProgress {
     }
     void log(const char* event) const {
         int p = phase.load(memory_order_relaxed);
-        fprintf(stderr, "V3_PROGRESS phase=%s event=%s max_candidates=%llu max_requested=%llu completed_mask=%d\n",
+        fprintf(stderr, "BUILD_PROGRESS phase=%s event=%s max_candidates=%llu max_requested=%llu completed_mask=%d\n",
                 p == 0 ? "shortcut" : "label", event,
                 (unsigned long long)entered[p].load(memory_order_relaxed),
                 (unsigned long long)requested[p].load(memory_order_relaxed), completed.load(memory_order_relaxed));
@@ -273,7 +273,7 @@ struct OmegaCtx {
 struct QueryOpts {
     bool hubPrune = true;  // Line 8 of Algorithm 2
     bool costSep = true;   // Line 6: separator with fewer signatures (else fewer vertices)
-    bool ffRef = false;    // V4 opt-in: choose the reference using free-flow costs.
+    bool ffRef = false;    // Choose the reference using free-flow costs.
 };
 
 // Per-query averages are taken by the caller; hubs/cands are counted on the chosen separator.

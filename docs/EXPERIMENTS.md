@@ -1,8 +1,8 @@
 # Experiments
 
-All commands below run from `code/`. Recorded CSVs are under the repository's top-level `results/`; new executions write to `code/results/`. They are kept separate so a replay does not overwrite the recorded results.
+Run the commands below from `code/`. The paper's results are in the top-level `results/` directory. New runs write to `code/results/`.
 
-## Small example and correctness
+## Tests
 
 ```bash
 make && bash tests/run_tests.sh
@@ -11,11 +11,11 @@ bash tests/run_ffref_tests.sh
 bash scripts/run_example.sh
 ```
 
-The first test ends with `ALL TESTS PASSED`. The example uses all five methods on the bundled CD model. Query CSVs record `completed`, `timeouts`, `verified`, and `mismatches`. A reported nonzero mismatch stops the scheduler. Verification uses the original implementation's floating-point tolerance; CCH-All uses a smaller direct-Dijkstra check sample, recorded in `verified`.
+The tests compare query answers against shortest-path searches. The example runs all five methods on CD. The `verified` column records the number of queries checked; CCH-All uses a smaller sample checked directly with Dijkstra. Query verification uses a relative tolerance of 1e-3, with an absolute tolerance of 1e-3 near zero.
 
 ## Main road-network experiments
 
-Download the DIMACS attachment and use the included frozen query sets:
+Download the DIMACS networks and use the query sets in `data/queries/`:
 
 ```bash
 python3 scripts/download_dimacs.py
@@ -31,9 +31,9 @@ done
 python3 scripts/collect.py results
 ```
 
-`gen` creates traffic from the frozen CD factors. Query generation is omitted above because the original queries are already included. `make_jobs.py genq` is available for a new dataset; do not run it over the frozen published query directories.
+`gen` creates traffic from the CD factors. The query sets are already included, so query generation is omitted above. For a new dataset, `make_jobs.py genq` generates query sets in `data/queries/`.
 
-The full matrix needs substantial RAM and disk space. The original server had 192 physical cores; the scheduler reserved at most 900 GiB in total. Timing tasks use one physical core and one private L3 cache domain each, with at most 12 tasks at once. The NUMA policy prefers local memory and permits allocation on other nodes. Large jobs reserve the entire scheduling budget. There is no uniform 64 GiB process limit. Use `GRAPHS="NY"`, then another graph, when indexes do not fit together. Increasing or reducing concurrency changes the timing conditions and should be reported.
+The experiments used a server with 192 physical cores and a total scheduling budget of 900 GiB. Each timing task uses one physical core and a separate L3 cache domain, with at most 12 tasks running together. Memory is allocated on the local NUMA node first and may extend to other nodes; tasks whose reservation exceeds a single node run alone. Set `GRAPHS="NY"` to run one network at a time when disk space is limited.
 
 The matrix uses rank 4, 90 days, 08:00 weekdays, and quantiles 0.5/0.8/0.95 as defaults. Rank, history, quantile count, time description, noise, and ablation settings are defined in `make_jobs.py`. Dijkstra and TTP use smaller query counts than the indexed methods, as recorded in each job and CSV. TTP uses a 60-second per-query timeout and stops early if its first five queries all time out.
 
@@ -44,13 +44,13 @@ python3 scripts/make_jobs.py threads > jobs_threads.tsv
 python3 scripts/sched.py jobs_threads.tsv --max-jobs 1 --max-mem-gb 900
 ```
 
-Additional matrices are available through `--extra X1` through `--extra X7`. The recorded V2 results include X1-X4. X5 was stopped; X7 was not run. The V3 `x6.csv` contains the later TTP parameter checks. Missing measurements are not filled with synthetic numbers.
+Additional experiments are available through `--extra X1` through `--extra X7`. Results for X1-X4 are in `results/v2/`, and the TTP parameter experiment (X6) is in `results/v3/x6.csv`. X5 was stopped; X7 was not run.
 
-## V3 and V4 additions
+## Additional baselines and ablations
 
-The portable adapters preserve the original additional task definitions. V3 timing jobs are generated with `python3 scripts/make_jobs.py --v3 time`; their main addition is TTP for the selected-day sweep. Its point-only query task is generated only when the matching local build result exists.
+`python3 scripts/make_jobs.py --v3 time` generates TTP jobs for the selected-day experiment and the TTP parameter sweep. It also generates point-only queries when the corresponding build result is available.
 
-For V4, first have the main generated datasets and points indexes available. Run the default query regression, then the six construction stages strictly one at a time. The seventh stage builds the small CD index if needed:
+The `--v4` tasks cover the remaining parameter baselines, query ablations, serial construction experiments, and CD case study. They require the generated datasets and points indexes from the main experiments. Run the query check first, then the six construction jobs in order. The seventh job builds the CD index if needed:
 
 ```bash
 python3 scripts/make_jobs.py --v4 default-check > jobs_v4_check.tsv
@@ -65,9 +65,9 @@ python3 scripts/make_jobs.py --v4 time > jobs_v4_time.tsv
 python3 scripts/sched.py jobs_v4_time.tsv --max-mem-gb 900 --max-time-jobs 12 --numa-policy preferred
 ```
 
-No other construction, timing, or case-analysis task should run during these V4 builds. Temporary construction indexes are named `idx/tmp_v4_*`; they can be removed after recording each build. Keep the FLA box index until its D1/D10 query checks have completed. The retained CD index is needed for MAP timing. Build timeout flags retain the original stage-level timing semantics.
+Run these builds without other experiment tasks. Temporary indexes are named `idx/tmp_v4_*` and can be removed after each build, except for the FLA box index, which is needed for the D1/D10 query checks. Keep the CD index for MAP timing. Build timeouts apply separately to the shortcut and label stages.
 
-The NY default regression should match the recorded D1/D10 `hubs_kept` and `cands_kept` values (1 / 1.032 and 12.627 / 139.169). Parallel construction may produce the small recorded `boxkept_mean` ordering differences. Do not select the best run or replace failed or timed-out rows.
+The NY query check should give `hubs_kept=1, cands_kept=1.032` for D1 and `hubs_kept=12.627, cands_kept=139.169` for D10. Small differences in `boxkept_mean` can arise from parallel construction order.
 
 ## Chengdu case analysis
 
@@ -75,7 +75,7 @@ Install NumPy and run `scripts/case_v4.py` through the case task above. It first
 
 The profile is for 1291 to 1127 over 22 weekdays in days [15,45). Shortest-path ties use sequential float64 component sums, a heap ordered by (distance, vertex ID), original outgoing edge order, and predecessor updates only for strictly shorter paths. Routes are distinguished by their directed edge sequences.
 
-`mean_eta` is the shortest travel time under the mean factor vector. `late_mean` counts days whose daily optimum exceeds that estimate; it is a lower bound on late days when following the fixed mean-condition route. `fixed_p50` and `fixed_p95` evaluate that fixed route across the snapshots. MAP timings run 1,901 independent source-target queries for each method and do not measure an optimized single-source algorithm.
+`mean_eta` is the shortest travel time under the mean factor vector. `late_mean` counts days whose daily optimum exceeds that estimate; it is a lower bound on late days when following the fixed mean-condition route. `fixed_p50` and `fixed_p95` evaluate that fixed route across the snapshots. MAP timings run 1,901 independent source-target queries for each method.
 
 ## Recorded results
 
@@ -85,4 +85,4 @@ The profile is for 1291 to 1127 over 22 weekdays in days [15,45). Shortest-path 
 | `results/v3/` | TTP day-count/parameter additions and the first point-only experiment |
 | `results/v4/` | Completed parameter baselines, expanded query ablations, isolated construction results, and CD case summaries |
 
-The V4 run completed 56 scheduled tasks, with 93,004 answer checks and zero mismatches. It retains 30 TTP single-query timeouts. These totals include the default query regression. An `OK` process or CSV status can still contain individual TTP timeouts: always inspect `completed` and `timeouts` when interpreting its latency. Model/reference errors in the real-data results are relative to published speed estimates with the documented common fill, not physical trip truth.
+Query CSVs report `completed`, `timeouts`, `verified`, and `mismatches`. An `OK` status may include individual TTP timeouts; use the completion and timeout counts when comparing latency. The `mean_us` column is the median of the per-round mean query times, in microseconds. Model-versus-reference query errors use published speeds, with the rank-8 model filling missing observations.

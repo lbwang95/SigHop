@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download the frozen DIMACS inputs outside Git, checking every SHA-256."""
+"""Download and verify the DIMACS graphs and coordinates."""
 import argparse,hashlib,json,shutil,tarfile,urllib.request
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]

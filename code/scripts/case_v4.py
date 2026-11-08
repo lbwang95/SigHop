@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""V4 CD analysis. Deterministic float64 Dijkstra; no benchmark timings are compared here."""
+"""Chengdu case analysis using deterministic shortest-path searches."""
 import csv,hashlib,heapq,json,math,struct,time
 from collections import defaultdict,deque
 from pathlib import Path
@@ -29,7 +29,7 @@ def load(path):
 
 def main():
     R.mkdir(parents=True,exist_ok=True);P.mkdir(parents=True,exist_ok=True)
-    assert not (R/'v4_case_profile.csv').exists(),'No silent analysis rerun'
+    assert not (R/'v4_case_profile.csv').exists(),'Output already exists: results/real/v4_case_profile.csv'
     data=Path('../data/models/CD_r4.bin');old=Path('../results/v2/real/case_cd.csv')
     inputs=[data,old]+[Path(f'../data/queries/CD/D{i}.txt') for i in [4,6,8,10]]
     hashes={str(p):sha(p) for p in inputs};begin=time.time()
@@ -96,7 +96,7 @@ def main():
         validation.append([start(tau),22,*errors,routes,int(expected['routes']),int(mism)])
     write(P/'v4_case_validation.csv','start,days,p50_relative_error,p80_relative_error,p95_relative_error,routes,baseline_routes,mismatches',validation)
     mismatches=sum(x[-1] for x in validation);print(f'case profile mismatches={mismatches}/40',flush=True)
-    if mismatches:raise RuntimeError('CD profile disagrees with V2; STOP')
+    if mismatches:raise RuntimeError('CD profile differs from the reference results')
     write(R/'v4_case_profile.csv','start,days,p50_min,p80_min,p95_min,mean_eta_min,late_mean,fixed_p50_min,fixed_p80_min,fixed_p95_min,routes',profile)
     queries=defaultdict(list);unique_counts={}
     for setno in [4,6,8,10]:
@@ -127,15 +127,15 @@ def main():
     write(R/'v4_case_map.csv','t,x,y,start,p50,p95,mean_eta',maps)
     query_file=Path('../data/queries/CD/MAP.txt')
     expected_map=''.join(f'1291 {t}\n' for t in targets)
-    if query_file.exists():assert query_file.read_text()==expected_map, 'Frozen MAP queries differ'
+    if query_file.exists():assert query_file.read_text()==expected_map, 'Existing MAP queries differ'
     else:query_file.write_text(expected_map)
     (P/'v4_MAP.txt').write_bytes(query_file.read_bytes())
     assert all(sha(p)==h for p,h in hashes.items())
     protocol=dict(inputs=hashes,query_unique_counts=unique_counts,distinct_sources=len(queries),source=1291,targets=len(targets),profile_rows=40,pair_rows=20000,map_rows=len(maps),days=22,day_range=[15,45],slots=available,
         ties='float64 sequential component sums; min-heap (distance,vertex-id); outgoing arcs in original edge-id order; predecessor changes only for strictly smaller distance (same as legacy pathQuery)',
         mean_eta='shortest path under mean factor vector, not mean of daily optimal distances',late_mean='count of days daily optimal T_i exceeds mean_eta; lower bound on lateness if the mean-condition route is held fixed',
-        map_timing='htq will perform1901 independent point-pair queries; not a single-source-all-targets optimized baseline',map_query_sha256=sha(query_file),wall_seconds=time.time()-begin)
+        map_timing='1901 independent point-to-point queries',map_query_sha256=sha(query_file),wall_seconds=time.time()-begin)
     (P/'v4_case_protocol.json').write_text(json.dumps(protocol,indent=2)+'\n')
-    print('CASE_V4_COMPLETE',json.dumps({k:protocol[k] for k in ['targets','profile_rows','pair_rows','map_rows','distinct_sources','wall_seconds']}),flush=True)
+    print('CASE_ANALYSIS_COMPLETE',json.dumps({k:protocol[k] for k in ['targets','profile_rows','pair_rows','map_rows','distinct_sources','wall_seconds']}),flush=True)
 
 if __name__=='__main__':main()

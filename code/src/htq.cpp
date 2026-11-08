@@ -1,4 +1,4 @@
-// Experiment driver for the revised SigHop (see ../PLAN.md). Subcommands append rows to CSV files.
+// Command-line driver for SigHop. Subcommands append results to CSV files.
 //   htq genq     --data X --out DIR [--sets 10 --per 1000 --lmin 60 --seed 7]
 //   htq build    --data X --name NAME --prune points|box --index OUT.idx --timeout SEC --threads T --csv build.csv
 //   htq query    --data X --name NAME --method M --qdir DIR --phi SPEC [--index IDX] --csv query.csv
@@ -91,19 +91,19 @@ static string hdrBuild =
 
 // Index construction of SigHop with its statistics (index-cost table, Exp-6, Exp-7, Exp-8).
 static int cmdBuild(const Args& a) {
-    if (a.kv.count("stats-csv")) { fprintf(stderr, "V3_STAGE load_dataset\n"); fflush(stderr); }
+    if (a.kv.count("stats-csv")) { fprintf(stderr, "BUILD_STAGE load_dataset\n"); fflush(stderr); }
     Dataset d = loadDataset(a.need("data"));
     string name = a.get("name", a.need("data"));
     string prune = a.get("prune", "points");
     if (prune != "points" && prune != "box" && prune != "pointsonly")
         throw runtime_error("--prune must be points, box, or pointsonly");
     TreeDecomp T;
-    if (a.kv.count("stats-csv")) { fprintf(stderr, "V3_STAGE tree_decomposition\n"); fflush(stderr); }
+    if (a.kv.count("stats-csv")) { fprintf(stderr, "BUILD_STAGE tree_decomposition\n"); fflush(stderr); }
     T.build(d);
     vector<int> worlds(d.N);
     iota(worlds.begin(), worlds.end(), 0);
     SigIndex idx(d, T);
-    if (a.kv.count("stats-csv")) { fprintf(stderr, "V3_STAGE index_setup\n"); fflush(stderr); }
+    if (a.kv.count("stats-csv")) { fprintf(stderr, "BUILD_STAGE index_setup\n"); fflush(stderr); }
     idx.setup(worlds, prune != "box", prune != "pointsonly");
     idx.collectStats = a.kv.count("stats-csv") != 0;
     idx.timeoutSec = a.getd("timeout", 0);
@@ -119,7 +119,7 @@ static int cmdBuild(const Args& a) {
         minMb = idx.minBytes() / 1e6;
         offMb = idx.offBytes() / 1e6;
         if (a.kv.count("index")) {
-            if (idx.collectStats) { fprintf(stderr, "V3_STAGE save_index\n"); fflush(stderr); }
+            if (idx.collectStats) { fprintf(stderr, "BUILD_STAGE save_index\n"); fflush(stderr); }
             idx.dropShortcuts();
             idx.save(a.get("index"));
         }

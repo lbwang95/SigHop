@@ -1,4 +1,4 @@
-"""Prepare official irregular Chicago speed reports under the frozen 15-minute rules."""
+"""Aggregate Chicago traffic reports into 15-minute speed snapshots."""
 import argparse,csv,datetime,hashlib,json,math,re
 from collections import defaultdict
 from pathlib import Path

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the bundled models and frozen query files using only the standard library."""
+"""Check model and query files against data/manifest.json."""
 import hashlib,json,struct
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]

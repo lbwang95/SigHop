@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Writes the jobs of one phase of PLAN.md as a TSV for scripts/sched.py.
+"""Write experiment jobs as a TSV file for scripts/sched.py.
 
   python3 scripts/make_jobs.py gen|genq|build|mem|time|threads > jobs_<phase>.tsv
 
@@ -84,7 +84,7 @@ if EXTRA and EXTRA not in ['X%d' % i for i in range(1,8)]:sys.exit('unknown extr
 PY_DATA = os.environ.get('HTQ_DATA_PYTHON',sys.executable)
 
 if '--prepare' in sys.argv or '--prepare-import' in sys.argv or '--real' in sys.argv:
-    sys.exit('See ../docs/DATA.md and ../docs/EXPERIMENTS.md for portable data preparation.')
+    sys.exit('See ../docs/DATA.md and ../docs/EXPERIMENTS.md for data preparation.')
 
 if EXTRA and phase != 'time':
     if phase not in ('gen','genq','build','mem'):sys.exit('unsupported extra phase')

@@ -1,8 +1,8 @@
 # SigHop: Efficiently Answering Travel-Time Quantile Queries over Historical Traffic
 
-This repository contains the implementation, fitted traffic models, query sets, and main experimental results for SigHop.
+This repository contains the source code, data, and experimental results for SigHop.
 
-Given a source, a target, a time description, and quantile levels, SigHop returns quantiles of the shortest travel times over the selected historical snapshots. Edge travel times are represented by nonnegative edge loadings and snapshot factors. The implementation includes SigHop, CCH-All, CCH-Batch, Dijkstra, and TTP-adapt.
+SigHop answers travel-time quantile queries over historical traffic using a low-rank model of edge travel times. The code also includes CCH-All, CCH-Batch, Dijkstra, and TTP-adapt.
 
 ## Usage
 
@@ -21,7 +21,7 @@ make
 bash tests/run_tests.sh
 ```
 
-The final test line should be `ALL TESTS PASSED`. Additional tests cover the point-only construction and the free-flow reference query variant:
+The tests check query answers against shortest-path searches and print `ALL TESTS PASSED` on success. Tests for the two ablations are also available:
 
 ```bash
 bash tests/run_pointsonly_tests.sh
@@ -30,13 +30,13 @@ bash tests/run_ffref_tests.sh
 
 ### Running Example
 
-The repository includes the small Chengdu model and its original query sets. From `code/`, run:
+To run all five methods on the Chengdu model, use the following command in `code/`:
 
 ```bash
 bash scripts/run_example.sh
 ```
 
-This builds an index and runs 20 queries with each of the five methods. Results are written to `code/results/example/`. Use a different output directory for another run, for example `bash scripts/run_example.sh results/example2`.
+The script builds the index and runs 20 queries per method. It writes the results to `code/results/example/`. An output directory can also be specified: `bash scripts/run_example.sh results/example2`.
 
 ### Execution
 
@@ -63,9 +63,9 @@ bin/htq query --data ../data/models/CD_r4.bin --name CD_r4 \
 
 ## Data Description
 
-The Git repository contains only small fitted models, fixed query sets, and summary results. The four large DIMACS inputs are a separate [download attachment](https://github.com/lbwang95/SigHop/releases/download/data-v1/sighop-dimacs-v1.tar.gz). Generated traffic and indexes are rebuilt locally.
+The fitted traffic models and query sets are included in `data/`. The four DIMACS networks are available as a separate [download](https://github.com/lbwang95/SigHop/releases/download/data-v1/sighop-dimacs-v1.tar.gz).
 
-| Data | Included or downloaded | Description |
+| Data | Location | Description |
 |---|---|---|
 | Chengdu (CD), Chicago (CHI) | `data/models/` | Fitted models at ranks 2, 4, 6, and 8; `HTQDATA1` format |
 | Query sets | `data/queries/` | The original source-target pairs used in the experiments |
@@ -79,21 +79,19 @@ python3 scripts/download_dimacs.py
 python3 scripts/verify_data.py
 ```
 
-The downloader checks both the archive and the individual files. [Data sources and format](docs/DATA.md) describe provenance, units, licenses, and model preparation. [Experiment instructions](docs/EXPERIMENTS.md) explain generation, scheduling, and the result files.
+See [Data](docs/DATA.md) for the sources and file formats, and [Experiments](docs/EXPERIMENTS.md) for the settings and scripts used in the paper.
 
 ## Code Structure
 
 ```text
 code/
   src/          SigHop, graph decomposition, baselines, and command-line drivers
-  model/        Original traffic-model fitting and reference-analysis tools
+  model/        Traffic-model fitting and reference queries
   scripts/      Data checks, experiment job generation, scheduling, and case analysis
   tests/        Correctness tests
 data/
-  models/       Small fitted CD and CHI models
+  models/       Fitted CD and CHI models
   queries/      Fixed query sets
 results/        Recorded numerical results
-docs/           Data format, experimental settings, and release notes
+docs/           Data format and experiment instructions
 ```
-
-The six files in `code/src/` are unchanged from the final V4 experiments; their hashes are recorded in [source_hashes.json](docs/source_hashes.json). The public copy adapts paths and removes machine-specific controllers. It does not change the algorithms or the experiment parameter matrix.

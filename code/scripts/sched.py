@@ -14,7 +14,7 @@ JOBS.tsv has one job per line: id <TAB> kind <TAB> mem_gb <TAB> threads <TAB> de
 Isolation rules:
   * Every job is pinned with taskset to physical cores (one hardware thread per core).
   * build/gen jobs get whole L3 domains (CCDs on EPYC) with ceil(threads / cores-per-L3) domains.
-  * time jobs are single-threaded and each gets its own L3 domain. With the user-approved
+  * time jobs are single-threaded and each gets its own L3 domain. With the
     preferred policy, memory is allocated on the local NUMA node first and may spill to other
     nodes. A time job whose reservation exceeds the largest node reserves the full scheduler
     budget and runs alone. --numa-policy bind restores the original strict binding.
@@ -118,7 +118,7 @@ def main():
         if not a.force and os.path.exists(sp) and open(sp).read().strip() in ("OK", "TO"):
             continue
         if not a.force and os.path.exists(sp) and open(sp).read().strip()=='MO' and Path('logs/final_mo',j['id']+'.json').exists():
-            print('[reuse] %s final MO after900GiB retry' % j['id'],flush=True)
+            print('[reuse] %s (recorded memory limit failure)' % j['id'],flush=True)
             continue
         pending.append(j)
     # order: time jobs alternate sockets; otherwise keep file order
@@ -166,7 +166,7 @@ def main():
             if p.poll() is not None:
                 failed = finish(p) or failed
         if failed:
-            # Only stop process groups created by this scheduler; keep all evidence.
+            # Terminate process groups started by this scheduler.
             for p, (j, t0, ds, logf) in list(running.items()):
                 try:
                     os.killpg(p.pid, signal.SIGTERM)
@@ -190,10 +190,10 @@ def main():
             if cancelled.get(j['id'],{}).get('cancelled'):
                 if not os.path.exists(status_path(j)) or not open(status_path(j)).read().startswith('SKIP_PLAN'):
                     preserve(j)
-                    open(status_path(j),'w').write('SKIP_PLAN removed by authoritative EXPERIMENTS_V2.md\n')
+                    open(status_path(j),'w').write('SKIP_PLAN cancelled by job configuration\n')
                     summary.write('%s\tSKIP_PLAN\t0.0\t-\n' % j['id']);summary.flush()
                 pending.remove(j)
-                print('[skip] %s (removed by updated plan)' % j['id'],flush=True)
+                print('[skip] %s (cancelled)' % j['id'],flush=True)
                 continue
             missing = [d for d in j["deps"].split(",") if d not in ("-", "") and not os.path.exists(d)]
             if missing:
@@ -234,7 +234,7 @@ def main():
                 except (ValueError, OSError):
                     pass  # not supported on this platform
 
-            # Reruns must not erase the first MO/FAIL/aborted attempt.
+            # Archive logs from earlier attempts.
             preserve(j)
             logf = open(os.path.join(a.logs, j["id"] + ".log"), "w")
             logf.write("# %s\n# cpus %s\n" % (j["cmd"], cpus))

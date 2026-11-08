@@ -1,4 +1,4 @@
-"""V3-only additions to the existing make_jobs.py entry point."""
+"""Jobs for TTP parameter experiments and point-only construction."""
 import csv,sys
 from pathlib import Path
 

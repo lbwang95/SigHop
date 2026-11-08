@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Forward a scheduled job's output and stop immediately on reported mismatches.
-
-This keeps the supplied C++ sources untouched. Signals are forwarded to the entire child
-process group so the scheduler never leaves an orphan experiment after stopping a job.
-"""
+"""Forward job output and terminate its process group on a mismatch or signal."""
 import os, re, signal, subprocess, sys
 
 child=None

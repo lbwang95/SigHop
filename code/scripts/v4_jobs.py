@@ -1,4 +1,4 @@
-"""V4 task adapter, preserving the V2 tjob budgets and query parameters."""
+"""Jobs for parameter baselines, ablations, and the Chengdu case study."""
 import csv,sys
 from pathlib import Path
 GRAPHS=['NY','BAY','COL','FLA'];SETS=','.join('D%d'%i for i in range(1,11))
