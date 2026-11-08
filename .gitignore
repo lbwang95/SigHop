@@ -1,0 +1,18 @@
+# Generated executables, indexes, datasets, logs, and working results.
+code/bin/
+code/idx/
+code/logs/
+code/results/
+code/jobs_*.tsv
+data/dimacs/
+data/generated/
+data/raw/
+data/work/
+*.idx
+*.o
+*.pyc
+__pycache__/
+*.zip
+*.tar.gz
+.DS_Store
+Thumbs.db

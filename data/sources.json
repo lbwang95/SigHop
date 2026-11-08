@@ -1,0 +1,43 @@
+{
+  "CD": {
+    "city": "Chengdu",
+    "source": "https://doi.org/10.6084/m9.figshare.7140209.v4",
+    "license": {
+      "value": 2,
+      "name": "CC0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    },
+    "source_slot_seconds": 120,
+    "slot_seconds": 900,
+    "observations": 10578540,
+    "heldout": 531340,
+    "holdout_seed": 20261105,
+    "holdout_unit": "edge-day block; all quarter-hour entries of that edge-day share one assignment",
+    "freeflow": "95th percentile of aggregated training speeds; held-out edge-day blocks excluded",
+    "date_range": [
+      "2015-06-01",
+      "2015-07-15"
+    ],
+    "grid_worlds": 1800,
+    "retained_worlds": 1780,
+    "world_filter_rule": "omit only worlds with zero published positive speed entries; fitted U and retained Z unchanged"
+  },
+  "CHI": {
+    "city": "Chicago",
+    "source": "https://data.cityofchicago.org/resource/sxs8-h27x",
+    "license": "SEE_TERMS_OF_USE",
+    "slot_seconds": 900,
+    "observations": 1446304,
+    "heldout": 72680,
+    "holdout_seed": 20261105,
+    "holdout_unit": "edge-day block",
+    "freeflow": "95th percentile of training aggregate speeds",
+    "date_range": [
+      "2019-01-01",
+      "2019-02-14"
+    ],
+    "grid_worlds": 4275,
+    "retained_worlds": 3268,
+    "world_filter_rule": "omit only worlds with zero published positive speed entries; fitted U and retained Z unchanged"
+  }
+}

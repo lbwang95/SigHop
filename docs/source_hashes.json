@@ -1,0 +1,8 @@
+{
+  "code/src/baselines.hpp": "e73cde12e8ed9fd14b750fd79d02f3fa92f1e98d57c498b6ff5d14743887f7fd",
+  "code/src/common.hpp": "30b3e487299578d58291615963376694986f86ddafbb3fee3fd27cfbdda67bdc",
+  "code/src/gen.cpp": "31c44b8965d9e24ef587c206c59ee6ea640c680fbc1db778b1de8700c60f2ce9",
+  "code/src/htq.cpp": "01f01fb2540dbaf4187a173a3a19aaebba933c15d03c7a990c4dab48815b3926",
+  "code/src/sig.hpp": "b04bd3c9310c43c977d8960f5b768c8fe336a030e12f8af21193f02d210b94ff",
+  "code/src/td.hpp": "20ca83236e544973845ba73a45c92e59b0e19c049812774dbd5b7431a72e341b"
+}

@@ -1,0 +1,488 @@
+[
+  {
+    "path": "data/models/CD_r2.bin",
+    "bytes": 145976,
+    "sha256": "4d6f680df1d486e91ff83441532a3e81db40eaf6a02c5b39c10fbd8ac1382024",
+    "header": {
+      "n": 1902,
+      "m": 5943,
+      "r": 2,
+      "N": 1780,
+      "days": 45,
+      "slots": 96,
+      "coordinates": 1,
+      "slot_seconds": 900.0
+    }
+  },
+  {
+    "path": "data/models/CD_r4.bin",
+    "bytes": 207760,
+    "sha256": "177a025798ae824f36445b053be50ae6f774805be98293cc8993ef9df73705d6",
+    "header": {
+      "n": 1902,
+      "m": 5943,
+      "r": 4,
+      "N": 1780,
+      "days": 45,
+      "slots": 96,
+      "coordinates": 1,
+      "slot_seconds": 900.0
+    }
+  },
+  {
+    "path": "data/models/CD_r6.bin",
+    "bytes": 269544,
+    "sha256": "73140d3e9f5a63d261a8007b8b12d12962dcde3486276710ca489acaeaba0080",
+    "header": {
+      "n": 1902,
+      "m": 5943,
+      "r": 6,
+      "N": 1780,
+      "days": 45,
+      "slots": 96,
+      "coordinates": 1,
+      "slot_seconds": 900.0
+    }
+  },
+  {
+    "path": "data/models/CD_r8.bin",
+    "bytes": 331328,
+    "sha256": "e2a5d716f93b04f91c5bbd0c64762f74ff5fefa389e7898e79b40b930560f932",
+    "header": {
+      "n": 1902,
+      "m": 5943,
+      "r": 8,
+      "N": 1780,
+      "days": 45,
+      "slots": 96,
+      "coordinates": 1,
+      "slot_seconds": 900.0
+    }
+  },
+  {
+    "path": "data/models/CHI_r2.bin",
+    "bytes": 81928,
+    "sha256": "75e281587b22ae4000e5c10711a77088c2ba5c46eb5871fb61c35bbef44f631f",
+    "header": {
+      "n": 390,
+      "m": 836,
+      "r": 2,
+      "N": 3268,
+      "days": 45,
+      "slots": 96,
+      "coordinates": 1,
+      "slot_seconds": 900.0
+    }
+  },
+  {
+    "path": "data/models/CHI_r4.bin",
+    "bytes": 114760,
+    "sha256": "1f2eac699995c589ebd1f9abfe0e2226220307081be0ef752ccf18e507d4049c",
+    "header": {
+      "n": 390,
+      "m": 836,
+      "r": 4,
+      "N": 3268,
+      "days": 45,
+      "slots": 96,
+      "coordinates": 1,
+      "slot_seconds": 900.0
+    }
+  },
+  {
+    "path": "data/models/CHI_r6.bin",
+    "bytes": 147592,
+    "sha256": "6bfce2b236e2a0765fe68fbd085a923dcfa53edbb326ec2b061b96d0c13a953a",
+    "header": {
+      "n": 390,
+      "m": 836,
+      "r": 6,
+      "N": 3268,
+      "days": 45,
+      "slots": 96,
+      "coordinates": 1,
+      "slot_seconds": 900.0
+    }
+  },
+  {
+    "path": "data/models/CHI_r8.bin",
+    "bytes": 180424,
+    "sha256": "54e35842454841a7c6f1232e30dc4f5aafa89dc6d137bc54c75d4075764f3fbe",
+    "header": {
+      "n": 390,
+      "m": 836,
+      "r": 8,
+      "N": 3268,
+      "days": 45,
+      "slots": 96,
+      "coordinates": 1,
+      "slot_seconds": 900.0
+    }
+  },
+  {
+    "path": "data/queries/NY/D1.txt",
+    "bytes": 13217,
+    "sha256": "cc0b82e18c5dd356c584f57df12440ad5c26b29506d0c73a976eb227029b3892",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/NY/D10.txt",
+    "bytes": 12968,
+    "sha256": "e1e1b73b08f597b0e3d7c1076a3071e9a1b6a3a2cc803e404b6ecb5b2afde188",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/NY/D2.txt",
+    "bytes": 13112,
+    "sha256": "4eccb6f3a980fbb568b02187ea25012d210792197425e07a71d461a741de0957",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/NY/D3.txt",
+    "bytes": 13108,
+    "sha256": "5454bbb510dfef909532e40a1ab9149027b4fdec6df2fdb9b963d28c309c46c1",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/NY/D4.txt",
+    "bytes": 13084,
+    "sha256": "f49ae4eed7e8e36e20cf5c75b49824a9783d32f12ccdb7d3fc937f5a1098787b",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/NY/D5.txt",
+    "bytes": 13090,
+    "sha256": "6f72717c2673fb7d5ae536a25eecb69a8c6371e513f48d7b60caefbb30121d7a",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/NY/D6.txt",
+    "bytes": 13118,
+    "sha256": "5e3473f3d51b9b03ef6d1d30d951bdec6c89eb1a25b42674b12faad982e2966d",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/NY/D7.txt",
+    "bytes": 13100,
+    "sha256": "dc454a94a0ae19cd5e0908487ceab1890fc9a9dcfbec2fe31c2816f11f702785",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/NY/D8.txt",
+    "bytes": 13105,
+    "sha256": "2ccec1434b897553702c2594669847cca16514afd90e871d94cd4721fc32a69a",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/NY/D9.txt",
+    "bytes": 13133,
+    "sha256": "d7e1b601c4996d1937bb9f37a6f18b7f7e4d8dddb8679d0a0934e30012fce218",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D1.txt",
+    "bytes": 13280,
+    "sha256": "9e0943fd524cef8832b6f289fed4621049c59a857932ba2357ee8fabbd03397b",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D10.txt",
+    "bytes": 13411,
+    "sha256": "a41f8abcd06cc095d84a29070bb92e4819e1364ea75047806c608a190c6dab7f",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D2.txt",
+    "bytes": 13285,
+    "sha256": "b2881c364fd59ff01ac331e218c38041d56256a17e7f79d950b6ae40576801ee",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D3.txt",
+    "bytes": 13326,
+    "sha256": "6aa8906fe7e4e6b5114c1b56b7cbd8e28f5f21210f8881644594d569cb9c83c1",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D4.txt",
+    "bytes": 13308,
+    "sha256": "6ccd66abc7309f4fcb2500093bb0da7f708736266d89ff1fc76bd0816a8ce5d1",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D5.txt",
+    "bytes": 13319,
+    "sha256": "0dc2eb0bad5792fb2b5baa021fdd22192b43634f223b25971b6e2de45c75ec2b",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D6.txt",
+    "bytes": 13313,
+    "sha256": "864fc9263fb3fc052708ee3630d8be7b803931eaaa321753cb25da20f2f3e8f4",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D7.txt",
+    "bytes": 13319,
+    "sha256": "680c8d1bd34ebc0c063841f73836a4b22698462dd970ea5ff20bb157a53a7900",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D8.txt",
+    "bytes": 13251,
+    "sha256": "b6411af5fb57dc5036f45a2a87619f493dcbab390d092934e5b96b15544833d6",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/BAY/D9.txt",
+    "bytes": 13321,
+    "sha256": "5034b336df0b5c38fe45b0d2d34f24274c7fbe123bd7283b34de656572330d56",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D1.txt",
+    "bytes": 13381,
+    "sha256": "e9d3e40f7a36e04a5ebb1a7a5afc5756ad04273d7add3e91da2c87d2e3731819",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D10.txt",
+    "bytes": 13508,
+    "sha256": "8534b97cad57d8bab51ac3d49210efae6f9a40ca716a0a7a9e575548ccdf15f0",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D2.txt",
+    "bytes": 13444,
+    "sha256": "5b2b196bc4fd29ea87a370591ff957ccbbfe3c3aaa04ca97db8890103e752cc1",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D3.txt",
+    "bytes": 13397,
+    "sha256": "d1f9cae0a6d0d81ca5a74ac4ac1a057f0e8ccc8695c6138d84a792410f4f7934",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D4.txt",
+    "bytes": 13428,
+    "sha256": "ac33dd58d86da71157255f407df532867dd78b3c485ddf6cc1a2ebdf8d46991b",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D5.txt",
+    "bytes": 13442,
+    "sha256": "ee86326cb780a5fb31909a30466a9714cef9424dcf1a666949bd491d38d236b0",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D6.txt",
+    "bytes": 13447,
+    "sha256": "a18f1fa4c2b29ad3b60e4566dfdb6e35f72a77373655056f2528560ec386826f",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D7.txt",
+    "bytes": 13453,
+    "sha256": "9fe5f00637cab9d959df71d29ee15422dad736224af501d07e3651eac7161a2e",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D8.txt",
+    "bytes": 13480,
+    "sha256": "c9c495d7f754e1b7f2d10f1648c6422064d35d0c5219610d8f316cbe904a3667",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/COL/D9.txt",
+    "bytes": 13508,
+    "sha256": "9bd4d177d504fbd674e454541d9b8d12f92e4909b9b7a57d8e1342a76bbb17b8",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D1.txt",
+    "bytes": 13882,
+    "sha256": "df735d00d09e8c12a0dd8aa628312690dff796f8fa7c7e213530edcf96c03448",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D10.txt",
+    "bytes": 13967,
+    "sha256": "82dcee18c563781bc530cf1390c7cd1733e2c6b9901d3566bfaf2c1b7de85f85",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D2.txt",
+    "bytes": 13879,
+    "sha256": "544b086e8386493751dcd062e08fe644bcdaed6b4ec5413575e1e77b11f9c35d",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D3.txt",
+    "bytes": 13913,
+    "sha256": "0d753965622accc2b2e3e2cb8c1bae5dce9b3c01a868a05dd80095f4761a3ea2",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D4.txt",
+    "bytes": 13947,
+    "sha256": "65821c2763514ea5cee73d174768c78d3ddca6eeb942ab5a19399ee08b663b5d",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D5.txt",
+    "bytes": 13948,
+    "sha256": "a5bbaac7faab3f4a31818c0b5e044e8cc39be2f293b47fca3aa63c499912ef29",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D6.txt",
+    "bytes": 13941,
+    "sha256": "f5a3d41a3d251311d9ad1445e933e55cd0b18222a8b352a80d4fae0d1dd48167",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D7.txt",
+    "bytes": 13941,
+    "sha256": "68d69720bef789f311506b161428585e4a50d683304f2856ea7116e84802b268",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D8.txt",
+    "bytes": 13933,
+    "sha256": "318dc2bd01725d69f5b7b7e2e9501ad1df880fd0059de84e111c412d2b188669",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/FLA/D9.txt",
+    "bytes": 13939,
+    "sha256": "0741b03a7785283f053350d2664de0cc93efb585b4e81e40f150a0d7bc35183a",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D1.txt",
+    "bytes": 8933,
+    "sha256": "d9d6f835d16447922ff2ea09eb81c8b780bd94764e0a5b2468c724d1c0d956fe",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D10.txt",
+    "bytes": 8110,
+    "sha256": "f5ae64025f900fecbf03f5cb7aa786152379c020dd55fe2c2dd7aa13d896bb64",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D2.txt",
+    "bytes": 8934,
+    "sha256": "e7ef04c498d8cb9bc1c62d8dc35a4e960f1ab34af3871170067e50e327a10a77",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D3.txt",
+    "bytes": 8899,
+    "sha256": "b3e9c0fa570ad72cdb4f30fb84fe22a7214856e3ff1a0ec453f569835ebd7922",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D4.txt",
+    "bytes": 8887,
+    "sha256": "7ea998e84d44b9c9fe7b867cc7be93e450c1b9105f17b93ee6543ff59f0fca10",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D5.txt",
+    "bytes": 8847,
+    "sha256": "d95267e5d8c31a963e20890aafb763c4fd095ada6647038ce4c963f1b889d289",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D6.txt",
+    "bytes": 8838,
+    "sha256": "245c22239ba49afb0acaa911d183dbd86ed04d5ed50fa689d4cb7b0610651a94",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D7.txt",
+    "bytes": 8878,
+    "sha256": "9790b79e2b954e84e0af203b0fedfc5814c02e2e2848f568f8ec4124fe8a28c2",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D8.txt",
+    "bytes": 8846,
+    "sha256": "79c649fca52c3fd33d015c4844052f3a0bee43d9380021d94f625c864a163b70",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CD/D9.txt",
+    "bytes": 8562,
+    "sha256": "826aca12258c405f55c1fa96d8d49e6f02ac9c0a203e13b70da85c04d81a1d93",
+    "queries": 1000
+  },
+  {
+    "path": "data/queries/CHI/D1.txt",
+    "bytes": 3001,
+    "sha256": "98ed3a701eccf4d2193b2d16ba4a3e556b1110a7aaffee399ac828eb67142533",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CHI/D10.txt",
+    "bytes": 3016,
+    "sha256": "2b9b7b5e7b59085c924703f15b3ee584325d9705a646c910cad3009ba24fe85a",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CHI/D2.txt",
+    "bytes": 3090,
+    "sha256": "1103dd95bd8bf5c06e2d10d00aea1518ff0f7de30e74ae48f833065ee7714779",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CHI/D3.txt",
+    "bytes": 3010,
+    "sha256": "75871bceab18ac173d1f6e19e9a8b61e88854cfb9c4caf3fa4dab4d80e7a6625",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CHI/D4.txt",
+    "bytes": 3052,
+    "sha256": "a06926fb16e21253a815c1f3738b85a9d88085c30bfe571c8bdbdeaa7c67f86a",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CHI/D5.txt",
+    "bytes": 3034,
+    "sha256": "f9eb52f8f173a4cb48bb1d035c290f7f01f33c8ccb291d545e86dc04d297043b",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CHI/D6.txt",
+    "bytes": 2994,
+    "sha256": "87c4f7793cc82509e4c94994c1c1ba57431ab3932eec873f5f9eb0fd3222b73a",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CHI/D7.txt",
+    "bytes": 3008,
+    "sha256": "8661f6ecdecdf954dff3ea0708d4a3272b77e0e3e7d0a42f60f6b7cdc0fbde70",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CHI/D8.txt",
+    "bytes": 3044,
+    "sha256": "d60b1d735934a0cb8f55ba2201a9fe7f7de3ee2282a99cbe4b828ea39512fc56",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CHI/D9.txt",
+    "bytes": 3065,
+    "sha256": "f683a11a1c8d333199f2ecf834a123f64335d91b290dd6b1892d4b1b4cdcb99e",
+    "queries": 407
+  },
+  {
+    "path": "data/queries/CD/MAP.txt",
+    "bytes": 17900,
+    "sha256": "77ff3fa1971b21f4c268eca8ea30dc318a7bb0e42f92fa31ece437ace9d2345d",
+    "queries": 1901
+  }
+]

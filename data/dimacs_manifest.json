@@ -1,0 +1,48 @@
+{
+  "asset": "sighop-dimacs-v1.tar.gz",
+  "bytes": 46362565,
+  "sha256": "1253741127aa66fb066a127e579b025a10dd7f7664feb89307265588669aa8b5",
+  "files": [
+    {
+      "path": "dimacs/USA-road-t.NY.gr",
+      "bytes": 14759295,
+      "sha256": "948377c7f0a974bdb0a9be76fd5b7ceff95bb78c2a011fa6661bde2f2f06f732"
+    },
+    {
+      "path": "dimacs/USA-road-d.NY.co",
+      "bytes": 7290781,
+      "sha256": "c39ec9b87c66d6e254f80cd3cfe20c7eb3c5ce4aca4063dc2efc228ab12fa95f"
+    },
+    {
+      "path": "dimacs/USA-road-t.BAY.gr",
+      "bytes": 16206846,
+      "sha256": "272f13715fa70a0d029193fa8cac70f4510fa4cadfd8d96b14198f19df20ac75"
+    },
+    {
+      "path": "dimacs/USA-road-d.BAY.co",
+      "bytes": 9205924,
+      "sha256": "5446a3b07e99a6fbf2aa091bd7095b55e4ba77bb94ac9865133b6b9af98af153"
+    },
+    {
+      "path": "dimacs/USA-road-t.COL.gr",
+      "bytes": 21759502,
+      "sha256": "5f54f0e5df788d05d930664771b281c18b8d49183a47698ee31a20f22f43bf48"
+    },
+    {
+      "path": "dimacs/USA-road-d.COL.co",
+      "bytes": 12523408,
+      "sha256": "1c545e75ef66d25fb8a2478a5395b3b0bd16e7fb463236a97f25718c89226ba4"
+    },
+    {
+      "path": "dimacs/USA-road-t.FLA.gr",
+      "bytes": 56703854,
+      "sha256": "89bfa1b128c3ae6b584c216fa41ee754db93cf2eee89592b6ee2465a20996c88"
+    },
+    {
+      "path": "dimacs/USA-road-d.FLA.co",
+      "bytes": 29930001,
+      "sha256": "e9ef8ff417f2e0b19faf51918b87f7e77d99269fa95726d105fdf47cd893e90d"
+    }
+  ],
+  "url": "https://github.com/lbwang95/SigHop/releases/download/data-v1/sighop-dimacs-v1.tar.gz"
+}
